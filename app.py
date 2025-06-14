@@ -29,7 +29,7 @@ if not state=="Select State":
                 st.warning("Please fill all the fields")
             else:
                 # Load service account info from Streamlit secrets
-                service_account_info = json.loads(st.secrets["GCP_SERVICE_ACCOUNT"])
+                service_account_info = st.secrets["GCP_SERVICE_ACCOUNT"]
                 credentials = service_account.Credentials.from_service_account_info(service_account_info)
                 # Initialize Earth Engine with the credentials
                 ee.Initialize(credentials)
