@@ -28,7 +28,6 @@ if not state=="Select State":
             if not all([district, start_year, end_year, project_id]):
                 st.warning("Please fill all the fields")
             else:
-                ee.Authenticate()
                 ee.Initialize(project=project_id)
                 gdf = shapefile[shapefile["District"]==district]
                 region = gdf.to_json()
