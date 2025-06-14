@@ -23,10 +23,9 @@ if not state=="Select State":
         with col2:
             current_year = datetime.datetime.now().year
             end_year = st.number_input("Enter the end date",min_value=(start_year+4),max_value=(current_year))
-        project_id = st.text_input("Enter the Project ID")
 
         if st.button("Run"):
-            if not all([district, start_year, end_year, project_id]):
+            if not all([district, start_year, end_year]):
                 st.warning("Please fill all the fields")
             else:
                 # Load service account info from Streamlit secrets
