@@ -30,7 +30,7 @@ if not state=="Select State":
             else:
                 # Load service account info from Streamlit secrets
                 service_account_info = st.secrets["GCP_SERVICE_ACCOUNT"]
-                credentials = service_account.Credentials.from_service_account_info(service_account_info)
+                credentials = service_account.Credentials.from_service_account_info(dict(service_account_info))
                 # Initialize Earth Engine with the credentials
                 ee.Initialize(credentials)
                 gdf = shapefile[shapefile["District"]==district]
