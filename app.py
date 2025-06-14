@@ -5,6 +5,7 @@ import geemap
 import geemap.foliumap as gmap
 import json
 import datetime
+from google.oauth2 import service_account
 
 st.set_page_config(layout="wide")
 st.title("🌳 NDVI Trend analysis")
@@ -28,7 +29,11 @@ if not state=="Select State":
             if not all([district, start_year, end_year, project_id]):
                 st.warning("Please fill all the fields")
             else:
-                ee.Initialize(project=project_id)
+                # Load service account info from Streamlit secrets
+                service_account_info = st.secrets["service_account"]
+                credentials = service_account.Credentials.from_service_account_info(dict(service_account_info))
+                # Initialize Earth Engine with the credentials
+                ee.Initialize(credentials)
                 gdf = shapefile[shapefile["District"]==district]
                 region = gdf.to_json()
                 json_dict = json.loads(region)
